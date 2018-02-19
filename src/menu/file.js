@@ -1,4 +1,4 @@
-import {app} from "electron";
+import {app, BrowserWindow} from "electron";
 
 export const menu_file = {
   label: "File",
