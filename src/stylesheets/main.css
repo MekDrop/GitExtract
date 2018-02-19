@@ -4,21 +4,122 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: Arial;
 }
 
-body {
+label {
+  font-size: 0.8em;
+}
+
+#app {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: sans-serif;
-  color: #525252;
+  height: 100%;
 }
 
-a {
-  text-decoration: none;
-  color: #cb3837;
+#app > div > div {
+  padding: 1em;
+  margin-right: 0.5em;
 }
 
-.container {
+#app > div > div input[type="text"] {
+  max-width: 100%;
+  width: 100%;
+}
+
+#app > div > div + div {
+  padding-top: 0em;
+}
+
+#app > div:first-child {
+  max-width: 20em;
+  width: 20%;
+  height: 100%;
+  border-right: solid 0.25em gray;
+  background-color: #f5f5f5;
+  overflow-y: auto;
+  min-width: 15em;
+}
+
+#app > div:last-child {
+  width: 100%;
+  padding: 0.5em;
+}
+
+#app > div:last-child .comment {
   text-align: center;
+  opacity: 0.5;
+}
+
+input[type="text"] {
+  border: solid 0.15em cornflowerblue;
+  padding: 0.25em;
+  border-radius: 5px;
+}
+
+button {
+  border: solid 0.25em cornflowerblue;
+  padding: 0.4em;
+  background-color: cornflowerblue !important;
+  color: white;
+  border-radius: 20%;
+}
+
+button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+button:disabled {
+  background-color: lightgrey !important;
+  border: solid 0.25em lightgrey;
+}
+
+input[type="text"]:focus {
+  outline: none !important;
+  border-color: deepskyblue;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+ul#statuses_list {
+  list-style: none !important;
+  list-style-type: none !important;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+}
+
+#statuses_list li {
+  padding-left: 1em;
+  text-indent: -0.1em;
+  vertical-align: middle;
+}
+
+#statuses_list li::before {
+  content: '☐';
+  line-height: 1em;
+  margin-right: 0.3em;
+  font-size: 1.5em;
+  color: lightgrey;
+  animation: blink 1s linear infinite;
+}
+
+#statuses_list li.ok::before {
+  content: '☑';
+  color: green;
+  animation: none;
+}
+
+#statuses_list li.error::before {
+  content: '☐';
+  color: orangered;
+  animation: none;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
