@@ -1,4 +1,8 @@
 import gitUrlIsOk from '../functions/git_url_is_ok.js';
+import progresBar from './boot/progress_bar.js';
+import {process} from "core-worker";
+import fs from 'fs';
+import fse from 'fs-extra';
 
 const git_url_original = document.querySelector('[name="git_url[original]"]');
 const git_url_result = document.querySelector('[name="git_url[result]"]');
@@ -42,6 +46,40 @@ const events = {
     requirements_status_changed: function (data) {
       isOk = data.detail.isOk;
       events.git_url_result.change(null);
+    }
+  },
+  action_read: {
+    click: function (e) {
+      progresBar.add(
+        function () {
+          if (!fs.existsSync('Vagrantfile')) {
+            const result = await
+            process("vagrant init MekDrop/GitExtract-Work-Box").death();
+            return result == 0;
+          } else {
+            return true;
+          }
+        },
+        function () {
+          if (fs.existsSync('Vagrantfile')) {
+            fs.unlinkSync('Vagrantfile');
+          }
+          return true;
+        }
+      );
+      progresBar.add(
+        function () {
+          const result = await
+          process("vagrant up --destroy-on-error --provision --install-provider").death();
+          return result == 0;
+        },
+        function () {
+          if (fs.existsSync('.vagrant')) {
+            fse.removeSync('.vagrant');
+          }
+          return true;
+        }
+      );
     }
   }
 };
