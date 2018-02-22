@@ -20,6 +20,7 @@ const protected_view = document.getElementById('protected_view');
 class ActionQueue extends EventAbstractClass {
 
   constructor() {
+    super();
     this.reset();
   }
 

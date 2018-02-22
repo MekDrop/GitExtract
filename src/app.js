@@ -14,4 +14,5 @@ const app = remote.app;
 
 import './boot/check_statuses.js';
 import './boot/inline_alert.js';
+import './boot/todo_form.js';
 import progresBar from './boot/progress_bar.js';

@@ -1,6 +1,5 @@
 import commandExists from 'command-exists';
 import isOnline from 'is-online';
-import gitUrlIsOk from '../functions/git_url_is_ok.js';
 import formatPath from '../functions/format_path.js';
 import chdir from 'chdir';
 import fs from 'fs';
@@ -53,6 +52,8 @@ statuses.querySelectorAll('[data-file][data-check="file-exists"]').forEach(
   }
 );
 
+let global_status = false;
+
 setInterval(
   function () {
     isOnline().then(online => {
@@ -64,15 +65,20 @@ setInterval(
     );
     let lic = lis.length;
 
-    let btn = document.getElementById('action');
     let disabled = lis.filter(
         li => li.className == 'ok'
-      ).length != lic || !gitUrlIsOk(document.querySelector('[name="git_url[original]"]').value) || !gitUrlIsOk(document.querySelector('[name="git_url[result]"]').value);
+      ).length != lic;
 
-    if (!disabled && btn.hasAttribute('disabled')) {
-      btn.removeAttribute('disabled');
-    } else if (disabled && !btn.hasAttribute('disabled')) {
-      btn.setAttribute('disabled', 'disabled');
+    if (global_status == disabled) {
+      global_status = !disabled;
+
+      document.dispatchEvent(
+        new CustomEvent('requirements_status_changed', {
+          detail: {
+            isOk: global_status
+          }
+        })
+      );
     }
   },
   500

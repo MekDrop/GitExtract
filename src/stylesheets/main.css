@@ -21,9 +21,36 @@ label {
   margin-right: 0.5em;
 }
 
+#app > div > div.todo {
+  padding-bottom: 0;
+}
+
 #app > div > div input[type="text"] {
   max-width: 100%;
   width: 100%;
+}
+
+#app > div:first-child label {
+  display: block;
+  width: 100%;
+}
+
+#app > div:first-child hr {
+  height: 2px;
+  border-width: 0;
+  color: gray;
+  background-color: lightgray;
+}
+
+#app > div:first-child .todo > div {
+  transition: all 0.5s;
+  margin-bottom: 1em;
+  line-height: 1.1em;
+}
+
+#app > div:first-child .todo > div.disabled {
+  opacity: 0.5;
+  filter: blur(1px);
 }
 
 #app > div > div + div {

@@ -8,19 +8,27 @@
 
 <div id="app" class="container">
   <div>
-    <div>
-      <label>Original repo address</label>
-      <input type="text" name="git_url[original]">
+    <div class="todo">
+      <div>
+        <label>1. Enter GIT repo address for source data:</label>
+        <input type="text" name="git_url[original]">
+      </div>
+      <div>
+        <label>2. Enter GIT repo address for results:</label>
+        <input type="text" name="git_url[result]">
+      </div>
+      <div>
+        <label>3. If both urls looks good, press the button:</label>
+        <button disabled data-action="read" type="button">Read</button>
+      </div>
+      <div>
+        <label>4. Have you selected files and folder to remove? If Yes, press the button!</label>
+        <button disabled data-action="extract" type="button">Extract!</button>
+      </div>
     </div>
+    <hr/>
     <div>
-      <label>Result repo address</label>
-      <input type="text" name="git_url[result]">
-    </div>
-    <div>
-      <button disabled id="action" type="submit">Read</button>
-    </div>
-    <div>
-      <label>Requirements status:</label>
+      <label>Check if all these requirements were met:</label>
       <ul id="statuses_list">
         <li data-check="internet-connection">
           Internet Connection
@@ -48,8 +56,8 @@
       Enter repo addresses and press 'Read'
     </p>
   </div>
-  </div>
+</div>
 
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
