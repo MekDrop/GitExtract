@@ -3,6 +3,7 @@ import progresBar from './boot/progress_bar.js';
 import {process} from "core-worker";
 import fs from 'fs';
 import fse from 'fs-extra';
+import isWindows from 'is-windows';
 
 const git_url_original = document.querySelector('[name="git_url[original]"]');
 const git_url_result = document.querySelector('[name="git_url[result]"]');
@@ -80,6 +81,13 @@ const events = {
           return true;
         }
       );
+      progresBar.add(
+        function () {
+          const null_device = isWindows() ? 'NULL' : '/dev/null';
+          let exe = process('vagrant ssh -c "hostname -I | cut -d\' \' -f2" 2>' + null_device);
+          // replace process with another way caus of license
+        }
+      )
     }
   }
 };
