@@ -1,8 +1,5 @@
 import gitUrlIsOk from '../functions/git_url_is_ok.js';
 import progresBar from './boot/progress_bar.js';
-import fs from 'fs';
-import isWindows from 'is-windows';
-import shelljs from 'shelljs';
 
 const git_url_original = document.querySelector('[name="git_url[original]"]');
 const git_url_result = document.querySelector('[name="git_url[result]"]');
@@ -10,7 +7,6 @@ const action_read = document.querySelector('[data-action="read"]');
 const action_extract = document.querySelector('[data-action="extract"]');
 
 let isOk = false;
-let actionData = {};
 
 const events = {
   git_url_original: {
@@ -51,63 +47,8 @@ const events = {
   },
   action_read: {
     click: function (e) {
-      progresBar.add(
-        function () {
-          if (!fs.existsSync('Vagrantfile')) {
-            let process = shelljs.exec(
-              "vagrant init MekDrop/GitExtract-Work-Box",
-              {
-                async: false,
-                silent: true
-              }
-            );
-            return process.code == 0;
-          } else {
-            return true;
-          }
-        },
-        function () {
-          if (fs.existsSync('Vagrantfile')) {
-            shelljs.rm('-rf', 'Vagrantfile');
-          }
-          return true;
-        }
-      );
-      progresBar.add(
-        function () {
-          let process = shelljs.exec(
-            "vagrant up --destroy-on-error --provision --install-provider",
-            {
-              async: false,
-              silent: true
-            }
-          );
-          return process.code == 0;
-        },
-        function () {
-          if (fs.existsSync('.vagrant')) {
-            shelljs.rm('-rf', '.vagrant');
-          }
-          return true;
-        }
-      );
-      progresBar.add(
-        function () {
-          const null_device = isWindows() ? 'NULL' : '/dev/null';
-          let process = shelljs.exec(
-            'vagrant ssh -c "hostname -I | cut -d\' \' -f2" 2>' + null_device,
-            {
-              async: false,
-              silent: true
-            }
-          );
-          actionData.virtual_box_ip = process.stdout;
-          return process.code == 0;
-        },
-        function () {
-          // What we can we do if can't detect ip?
-        }
-      )
+      progresBar.fillFrom('read');
+      progresBar.start();
     }
   }
 };

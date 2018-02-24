@@ -32,6 +32,23 @@ class ActionQueue extends EventAbstractClass {
     this.actions.push({execute, onFailed});
   }
 
+  fillFrom(name) {
+    const path = require("path");
+    const normalizedPath = path.join(
+      __dirname,
+      "..",
+      "action_queues",
+      name
+    );
+
+    let self = this;
+
+    require("fs").readdirSync(normalizedPath).forEach(function (file) {
+      let included = require(path.join(normalizedPath, file));
+      self.add(included.good, included.bad);
+    });
+  }
+
   async start() {
     this.trigger('started');
     let action = null;
