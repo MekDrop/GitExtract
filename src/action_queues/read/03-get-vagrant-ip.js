@@ -17,4 +17,5 @@ export function good() {
 
 export function bad() {
   // what we can do here?
+  return true;
 }
