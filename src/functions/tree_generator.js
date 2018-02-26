@@ -47,7 +47,7 @@ function getNewContainerNode(parent, path, is_folder, title) {
 
 export default function (content, data) {
   content.innerHTML = '';
-  let parent_list = document.createElement('ul')
+  let parent_list = document.createElement('ul');
   parent_list.className = 'files-tree';
   content.appendChild(parent_list);
   data
