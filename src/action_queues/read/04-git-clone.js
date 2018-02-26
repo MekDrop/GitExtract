@@ -1,6 +1,6 @@
 import isWindows from 'is-windows';
 import shelljs from 'shelljs';
-import actionData from '../functions/shared_dict.js';
+import actionData from '../../functions/shared_dict.js';
 import sha1 from 'sha1';
 
 export function good() {

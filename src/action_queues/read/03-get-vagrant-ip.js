@@ -1,6 +1,6 @@
 import isWindows from 'is-windows';
 import shelljs from 'shelljs';
-import actionData from '../functions/shared_dict.js';
+import actionData from '../../functions/shared_dict.js';
 
 export function good() {
   const null_device = isWindows() ? 'NULL' : '/dev/null';
