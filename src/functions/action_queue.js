@@ -46,6 +46,10 @@ class ActionQueue extends EventAbstractClass {
     this.trigger('finished');
   }
 
+  count() {
+    return this.actions.length;
+  }
+
 }
 
 export default ActionQueue;

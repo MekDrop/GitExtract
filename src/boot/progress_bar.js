@@ -28,12 +28,22 @@ class PBar {
     this.actions[0].on(
       'executing',
       function (fail_cmd) {
-        self.actions[1].push(0);
+        self.actions[1].push(
+          fail_cmd
+        );
+        bar.animate(self.calcProgressBarValue(0));
+      }
+    );
+    this.actions[1].on(
+      'executing',
+      function (fail_cmd) {
+        bar.animate(self.calcProgressBarValue(1));
       }
     );
     this.actions[0].on(
       'failed',
       function () {
+        self.failed_count = self.actions[1].count();
         self.actions[0].reset();
         self.actions[1].start();
       }
@@ -52,6 +62,16 @@ class PBar {
     );
   }
 
+  calcProgressBarValue(action_index) {
+    let current = this.max_steps - this.actions[0].count();
+    let value = 1.0 / this.max_steps * current;
+    if (action_index == 1) {
+      let cr = this.failed_count - this.actions[1].count();
+      value = value - value / this.failed_count * cr;
+    }
+    return value;
+  }
+
   reset() {
     this.actions.forEach(
       function (a) {
@@ -65,7 +85,9 @@ class PBar {
   }
 
   start() {
+    this.max_steps = this.actions[0].count();
     this.actions[0].start();
+    this.max_steps = null;
   }
 
 }
