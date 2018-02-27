@@ -1,5 +1,5 @@
 import gitUrlIsOk from '../functions/git_url_is_ok.js';
-import progresBar from './boot/progress_bar.js';
+import progresBar from '../boot/progress_bar.js';
 
 const git_url_original = document.querySelector('[name="git_url[original]"]');
 const git_url_result = document.querySelector('[name="git_url[result]"]');

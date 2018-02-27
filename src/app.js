@@ -1,4 +1,4 @@
-import "./stylesheets/main.css";
+import "./stylesheets/main.scss";
 
 // Small helpers you might want to keep
 import "./helpers/context_menu.js";

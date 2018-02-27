@@ -12,5 +12,6 @@ module.exports = env => {
       filename: "[name].js",
       path: path.resolve(__dirname, "../app")
     }
-  });
+    }
+  );
 };
