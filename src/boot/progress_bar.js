@@ -90,6 +90,10 @@ class PBar {
     this.max_steps = null;
   }
 
+  fillFrom(name) {
+    this.actions[0].fillFrom(name);
+  }
+
 }
 
 const PBar_instance = new PBar();

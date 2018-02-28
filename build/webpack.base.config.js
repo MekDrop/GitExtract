@@ -2,6 +2,7 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const webpack = require("webpack");
+const BomPlugin = require('webpack-utf8-bom');
 
 module.exports = env => {
   return {
@@ -25,14 +26,6 @@ module.exports = env => {
           use: ["babel-loader"]
         },
         {
-          test: /\.css$/,
-          use: [{
-            loader: "style-loader" // creates style nodes from JS strings
-          }, {
-            loader: "css-loader" // translates CSS into CommonJS
-          }]
-        },
-        {
           test: /\.scss$/,
           use: [{
             loader: "style-loader" // creates style nodes from JS strings
@@ -41,6 +34,18 @@ module.exports = env => {
           }, {
             loader: "sass-loader" // compiles Sass to CSS
           }]
+        },
+        {
+          test: /\.(gif|png|jpe?g|svg)$/i,
+          use: [
+            'file-loader',
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                bypassOnDebug: true,
+              },
+            },
+          ],
         }
       ]
     },
@@ -53,7 +58,8 @@ module.exports = env => {
       new webpack.ProvidePlugin({
         $: "jquery",
         jQuery: "jquery"
-      })
+      }),
+      new BomPlugin(false)
     ]
   };
 };

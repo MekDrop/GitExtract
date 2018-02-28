@@ -58,6 +58,7 @@ git_url_original.addEventListener('keydown', events.git_url_original.keydown);
 git_url_result.addEventListener('change', events.git_url_result.change);
 git_url_result.addEventListener('keydown', events.git_url_result.keydown);
 document.addEventListener('requirements_status_changed', events.document.requirements_status_changed);
+action_read.addEventListener('click', events.action_read.click);
 
 events.git_url_original.change(null);
 events.git_url_result.change(null);

@@ -1,4 +1,3 @@
-import 'jstree/dist/themes/default/style.min.css';
 import 'jstree';
 
 function createFolderLi(id, title, is_folder, path) {
