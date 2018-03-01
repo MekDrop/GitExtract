@@ -26,26 +26,21 @@ module.exports = env => {
           use: ["babel-loader"]
         },
         {
+          test: /\.css$/,
+          loaders: ['style-loader', 'css-loader', 'resolve-url-loader']
+        },
+        {
           test: /\.scss$/,
-          use: [{
-            loader: "style-loader" // creates style nodes from JS strings
-          }, {
-            loader: "css-loader" // translates CSS into CommonJS
-          }, {
-            loader: "sass-loader" // compiles Sass to CSS
-          }]
+          use: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader?sourceMap']
         },
         {
           test: /\.(gif|png|jpe?g|svg)$/i,
-          use: [
-            'file-loader',
-            {
-              loader: 'image-webpack-loader',
-              options: {
-                bypassOnDebug: true,
-              },
-            },
-          ],
+          loader: 'url-loader'
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|svg)$/,
+          exclude: /node_modules/,
+          loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
         }
       ]
     },
