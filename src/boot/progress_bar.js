@@ -28,8 +28,9 @@ class PBar {
     this.actions[0].on(
       'executing',
       function (fail_cmd) {
-        self.actions[1].push(
-          fail_cmd
+        self.actions[1].add(
+          fail_cmd,
+          () => true
         );
         bar.animate(self.calcProgressBarValue(0));
       }

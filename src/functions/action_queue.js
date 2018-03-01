@@ -29,7 +29,7 @@ class ActionQueue extends EventAbstractClass {
     this.trigger('started');
     let action = null;
     while (action = this.actions.shift()) {
-      this.trigger('executing', onFailed);
+      this.trigger('executing', action.onFailed);
       let isOK = await action.execute();
       if (!isOK) {
         this.trigger('failed');
