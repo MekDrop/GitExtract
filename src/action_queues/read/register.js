@@ -1,4 +1,5 @@
 let steps = [
+  require('./00-get-app-data-path.js'),
   require('./01-create-vagrantfile.js'),
   require('./02-vagrant-up.js'),
   require('./03-get-vagrant-ip.js'),
